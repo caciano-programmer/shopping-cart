@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressHbs = require("express-handlebars");
 var mongoose = require("mongoose");
+var session = require("express-session");
+var mongoStore = require("connect-mongo")(session);
 
 mongoose.Promise = global.Promise;
 var index = require('./routes/index');
@@ -23,6 +25,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({secret: "caciano", resave: false, saveUninitialized: false, store: new mongoStore({mongooseConnection: mongoose.connection})}))
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
