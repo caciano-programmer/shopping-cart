@@ -10,37 +10,37 @@ var Product = require("../models/product");
 var products =
 [
     new Product({
-    imagePath: "../public/images/Gothiccover.png",
-    title: "Gothic Video Game",
-    description: "Awesome Game",
-    price: 10
+        imagePath: "images/Gothiccover.png",
+        title: "Gothic Video Game",
+        description: "Awesome Game",
+        price: 13
     }),
     new Product({
-        imagePath: "../public/images/dark.jpg",
+        imagePath: "images/dark.jpg",
         title: "Dark Souls",
         description: "Awesome Game",
-        price: 10
+        price: 15
     }),
     new Product({
-        imagePath: "../public/images/gears.jpg",
+        imagePath: "images/gears.jpg",
         title: "Gears of war",
         description: "Awesome Game",
-        price: 10
+        price: 11
     }),
     new Product({
-        imagePath: "../public/images/nba.jpg",
+        imagePath: "images/nba.jpg",
         title: "NBA2k",
         description: "Awesome Game",
-        price: 10
+        price: 15
     }),
     new Product({
-        imagePath: "../public/images/halo.jpg",
+        imagePath: "images/halo.jpg",
         title: "Halo 5",
         description: "Awesome Game",
-        price: 10
+        price: 12
     }),
     new Product({
-        imagePath: "../public/images/Oblivion.png",
+        imagePath: "images/Oblivion.png",
         title: "Oblivion",
         description: "Awesome Game",
         price: 10
