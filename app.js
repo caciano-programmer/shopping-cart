@@ -8,12 +8,15 @@ var expressHbs = require("express-handlebars");
 var mongoose = require("mongoose");
 var session = require("express-session");
 var mongoStore = require("connect-mongo")(session);
+var passport = require("passport");
+var flash = require("connect-flash");
 
 mongoose.Promise = global.Promise;
 var index = require('./routes/index');
+var app = express();
 
 mongoose.connect("mongodb://localhost:27017/db", (err) => { if(err) throw err; });
-var app = express();
+require("./config/passport");
 
 // view engine setup
 app.engine(".hbs", expressHbs({defaultLayout: "layouts", extname: ".hbs"}));
@@ -25,7 +28,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({secret: "caciano", resave: false, saveUninitialized: false, store: new mongoStore({mongooseConnection: mongoose.connection})}))
+app.use(session({secret: "caciano", resave: false, saveUninitialized: false, store: new mongoStore({mongooseConnection: mongoose.connection})}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
