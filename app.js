@@ -10,6 +10,7 @@ var session = require("express-session");
 var mongoStore = require("connect-mongo")(session);
 var passport = require("passport");
 var flash = require("connect-flash");
+var validator = require("express-validator");
 
 mongoose.Promise = global.Promise;
 var index = require('./routes/index');
@@ -27,6 +28,7 @@ app.set('view engine', '.hbs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(validator());
 app.use(cookieParser());
 app.use(session({secret: "caciano", resave: false, saveUninitialized: false, store: new mongoStore({mongooseConnection: mongoose.connection})}));
 app.use(flash());
