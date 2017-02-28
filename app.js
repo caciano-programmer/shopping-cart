@@ -14,6 +14,8 @@ var validator = require("express-validator");
 
 mongoose.Promise = global.Promise;
 var index = require('./routes/index');
+var userRoutes = require('./routes/users');
+
 var app = express();
 
 mongoose.connect("mongodb://localhost:27017/db", (err) => { if(err) throw err; });
@@ -36,7 +38,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(req, res, next) {
+    res.locals.login = req.isAuthenticated();
+    next();
+});
+
+app.use("/users", userRoutes);
 app.use('/', index);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
