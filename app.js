@@ -17,6 +17,7 @@ var index = require('./routes/index');
 var userRoutes = require('./routes/users');
 
 var app = express();
+app.disable('x-powered-by');
 
 mongoose.connect("mongodb://localhost:27017/db", (err) => { if(err) throw err; });
 require("./config/passport");

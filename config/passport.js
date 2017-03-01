@@ -28,7 +28,7 @@ passport.use("local.signup", new LocalStrategy({
         if(errors)
         {
             var messages = [];
-            errors.forEach( (error) => {messages.push(error.msg); });
+            errors.forEach( (error) => { messages.push(error.msg); });
             return done(null, false, req.flash("error", messages))
         }
         User.findOne({"email": email}, (err, user) => {
