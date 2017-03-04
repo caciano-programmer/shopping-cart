@@ -23,10 +23,18 @@ router.get("/signup", (req, res, next) => {
     res.render("users/signup", {csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0});
 });
 router.post("/signup", passport.authenticate("local.signup",{
-    successRedirect: "/users/profile",
     failureRedirect: "/users/signup",
     failureFlash: true
-}));
+}), (req, res, next) => {
+    if(req.session.oldUrl)
+    {
+        let redirect = req.session.oldUrl;
+        req.session.oldUrl = null;
+        res.redirect(redirect);
+    }else
+        res.redirect("users/profile");
+
+});
 router.get("/signin", (req, res, next) => {
     var messages = req.flash("error");
     res.render("users/signin", {csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0});
