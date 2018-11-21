@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "seed-data": "node ./seed/product-seeder.js",
     "start": "node ./bin/www"
   },
   "dependencies": {
